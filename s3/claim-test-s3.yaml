@@ -1,0 +1,11 @@
+apiVersion: storage.platform.urukube.io/v1alpha1
+kind: US3Bucket
+metadata:
+  name: urukube-test-bucket
+  namespace: default
+spec:
+  parameters:
+    awsAccountId: "485646919618"
+    region: us-east-1
+    versioning: false
+    buId: BU001
