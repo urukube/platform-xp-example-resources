@@ -14,15 +14,11 @@ spec:
     azs:
       - us-east-1a
       - us-east-1b
-    eksNodeSubnetCidrs:
-      - 10.10.0.0/19
-      - 10.10.32.0/19
-    resourceSubnetCidrs:
-      - 10.10.64.0/19
-      - 10.10.96.0/19
-    publicSubnetCidrs:
-      - 10.10.128.0/24
-      - 10.10.129.0/24
+    # eksNodeSubnetCidrs, resourceSubnetCidrs, publicSubnetCidrs are optional.
+    # Auto-computed from vpcCidr when omitted (same logic as terraform-module-networking):
+    #   EKS nodes:  10.10.0.0/19, 10.10.32.0/19
+    #   Resources:  10.10.64.0/19, 10.10.96.0/19
+    #   Public:     10.10.192.0/24, 10.10.193.0/24
     singleNatGateway: true
     enableVpcEndpoints: true
     enableFlowLogs: false
