@@ -1,0 +1,34 @@
+apiVersion: networking.platform.urukube.io/v1alpha1
+kind: UNetwork
+metadata:
+  name: urukube-network-explicit
+  namespace: default
+  # Explicit claim: all subnet CIDRs provided, overriding auto-computation.
+  # Use this when you need non-standard layout — e.g. peering constraints,
+  # reserved ranges, or a VPC prefix other than /16.
+spec:
+  parameters:
+    awsAccountId: "485646919618"
+    region: us-east-1
+    buId: BU001
+    env: dev
+    friendlyName: bu001-dev-exp
+    vpcCidr: 10.20.0.0/16
+    azs:
+      - us-east-1a
+      - us-east-1b
+    eksNodeSubnetCidrs:
+      - 10.20.0.0/19
+      - 10.20.32.0/19
+    resourceSubnetCidrs:
+      - 10.20.64.0/19
+      - 10.20.96.0/19
+    publicSubnetCidrs:
+      - 10.20.192.0/24
+      - 10.20.193.0/24
+    singleNatGateway: true
+    enableVpcEndpoints: true
+    enableFlowLogs: false
+    tags:
+      team: platform
+      managed-by: crossplane

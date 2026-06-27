@@ -1,0 +1,28 @@
+apiVersion: networking.platform.urukube.io/v1alpha1
+kind: UNetwork
+metadata:
+  name: urukube-network-minimal
+  namespace: default
+  # Minimal claim: only vpcCidr and azs are required for subnet layout.
+  # The composition auto-computes subnet CIDRs using the same logic as
+  # terraform-module-networking/locals.tf:
+  #   EKS nodes:  cidrsubnet(vpcCidr, 3, idx)           → 10.10.0.0/19, 10.10.32.0/19
+  #   Resources:  cidrsubnet(vpcCidr, 3, numAzs + idx)  → 10.10.64.0/19, 10.10.96.0/19
+  #   Public:     cidrsubnet(vpcCidr, 8, 192 + idx)     → 10.10.192.0/24, 10.10.193.0/24
+spec:
+  parameters:
+    awsAccountId: "485646919618"
+    region: us-east-1
+    buId: BU001
+    env: dev
+    friendlyName: bu001-dev-min
+    vpcCidr: 10.10.0.0/16
+    azs:
+      - us-east-1a
+      - us-east-1b
+    singleNatGateway: true
+    enableVpcEndpoints: true
+    enableFlowLogs: false
+    tags:
+      team: platform
+      managed-by: crossplane
