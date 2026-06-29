@@ -4,7 +4,7 @@ metadata:
   name: urukube-eks-minimal
   namespace: default
   # Minimal claim: only required fields. All node/cluster settings use defaults:
-  #   kubernetesVersion: "1.32"
+  #   kubernetesVersion: "1.36"
   #   nodeInstanceType:  t3.medium
   #   minSize/maxSize/desiredSize: 2/3/2
   #   endpointAccessType: private
@@ -21,15 +21,17 @@ spec:
     env: dev
     friendlyName: bu001-dev
     # --- values from UNetwork claim status ---
-    vpcId: vpc-0000000000000000
+    vpcId: vpc-0b53d10d8690a21bc
     subnetIds:
-      - subnet-0000000000000000   # us-east-1a EKS node subnet
-      - subnet-0000000000000001   # us-east-1b EKS node subnet
+      - subnet-004d18fc6ea1d88a7   # us-east-1a EKS node subnet
+      - subnet-023d096bd550669ad   # us-east-1b EKS node subnet
     subnetCidrs:
       - 10.10.0.0/19
       - 10.10.32.0/19
-    nodeSecurityGroupId: sg-0000000000000000
-    controlPlaneSecurityGroupId: sg-0000000000000001
+    nodeSecurityGroupId: sg-02500e667cfc3584f
+    controlPlaneSecurityGroupId: sg-0c6e0ffad29698af2
+    kubernetesVersion: "1.36"
+    nodeAmiId: ami-082b37985d4f2aa44   # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)
     # -----------------------------------------
     tags:
       team: platform
