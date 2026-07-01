@@ -31,6 +31,8 @@ spec:
     nodeSecurityGroupId: sg-0b912b696480c2a2f
     controlPlaneSecurityGroupId: sg-05fdcfdd0d9f86fec
     endpointAccessType: public
+    adminRoleArns:
+      - arn:aws:iam::485646919618:role/OrbitClusterEKSAdmin
     kubernetesVersion: "1.36"
     nodeAmiId: ami-082b37985d4f2aa44   # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)
     # -----------------------------------------
