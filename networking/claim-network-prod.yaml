@@ -1,0 +1,28 @@
+apiVersion: networking.platform.urukube.io/v1alpha1
+kind: UNetwork
+metadata:
+  name: urukube-network-prod
+  namespace: default
+  # Prod claim: one NAT gateway per AZ (HA), 3 AZs, flow logs enabled.
+  # Subnet CIDRs are auto-computed from vpcCidr:
+  #   EKS nodes:  10.20.0.0/19, 10.20.32.0/19, 10.20.64.0/19
+  #   Resources:  10.20.96.0/19, 10.20.128.0/19, 10.20.160.0/19
+  #   Public:     10.20.192.0/24, 10.20.193.0/24, 10.20.194.0/24
+spec:
+  parameters:
+    awsAccountId: "485646919618"
+    region: us-east-1
+    buId: BU001
+    env: prod
+    friendlyName: bu001-prod
+    vpcCidr: 10.20.0.0/16
+    azs:
+      - us-east-1a
+      - us-east-1b
+      - us-east-1c
+    singleNatGateway: false
+    enableVpcEndpoints: true
+    enableFlowLogs: true
+    tags:
+      team: platform
+      managed-by: crossplane

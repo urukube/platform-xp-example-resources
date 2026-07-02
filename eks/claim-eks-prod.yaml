@@ -1,0 +1,46 @@
+apiVersion: compute.platform.urukube.io/v1alpha1
+kind: UEks
+metadata:
+  name: urukube-eks-prod
+  namespace: default
+  # Prod claim: private endpoint with restricted public access, m5.large nodes, 3 AZs.
+  # vpcId, subnetIds, subnetCidrs, nodeSecurityGroupId and controlPlaneSecurityGroupId
+  # come from the UNetwork claim — apply claim-network-prod.yaml first, then copy from:
+  #   kubectl get unetwork urukube-network-prod -o yaml | grep -A20 status
+spec:
+  parameters:
+    awsAccountId: "485646919618"
+    region: us-east-1
+    buId: BU001
+    env: prod
+    friendlyName: bu001-prod
+    # --- values from UNetwork claim status (urukube-network-prod) ---
+    vpcId: vpc-0000000000000000           # replace with prod VPC ID
+    subnetIds:
+      - subnet-0000000000000000           # us-east-1a EKS node subnet
+      - subnet-0000000000000001           # us-east-1b EKS node subnet
+      - subnet-0000000000000002           # us-east-1c EKS node subnet
+    subnetCidrs:
+      - 10.20.0.0/19
+      - 10.20.32.0/19
+      - 10.20.64.0/19
+    nodeSecurityGroupId: sg-0000000000000000     # replace with prod SG ID
+    controlPlaneSecurityGroupId: sg-0000000000000001  # replace with prod SG ID
+    # ---------------------------------------------------------------
+    kubernetesVersion: "1.36"
+    nodeAmiId: ami-082b37985d4f2aa44   # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)
+    endpointAccessType: private_with_public_cidrs
+    endpointPublicAccessCidrs:
+      - 203.0.113.0/24   # replace with your office/VPN CIDR
+    adminRoleArns:
+      - arn:aws:iam::485646919618:role/OrbitClusterEKSAdmin
+    nodeInstanceType: m5.large
+    amiType: AL2023_x86_64_STANDARD
+    minSize: 2
+    maxSize: 6
+    desiredSize: 3
+    maxPodsPerNode: 58
+    enableIstio: true
+    tags:
+      team: platform
+      managed-by: crossplane

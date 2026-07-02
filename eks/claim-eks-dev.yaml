@@ -1,18 +1,12 @@
 apiVersion: compute.platform.urukube.io/v1alpha1
 kind: UEks
 metadata:
-  name: urukube-eks-minimal
+  name: urukube-eks-dev
   namespace: default
-  # Minimal claim: only required fields. All node/cluster settings use defaults:
-  #   kubernetesVersion: "1.36"
-  #   nodeInstanceType:  t3.medium
-  #   minSize/maxSize/desiredSize: 2/3/2
-  #   endpointAccessType: private
-  #   maxPodsPerNode: 30
-  #
+  # Dev claim: public endpoint, t3.medium nodes, 2 AZs.
   # vpcId, subnetIds, subnetCidrs, nodeSecurityGroupId and controlPlaneSecurityGroupId
-  # are sourced from the UNetwork claim status — apply a networking claim first and
-  # copy the values from: kubectl get unetwork <name> -o yaml | grep -A20 status
+  # come from the UNetwork claim — apply claim-network-dev.yaml first, then copy from:
+  #   kubectl get unetwork urukube-network-dev -o yaml | grep -A20 status
 spec:
   parameters:
     awsAccountId: "485646919618"
@@ -20,7 +14,7 @@ spec:
     buId: BU001
     env: dev
     friendlyName: bu001-dev
-    # --- values from UNetwork claim status ---
+    # --- values from UNetwork claim status (urukube-network-dev) ---
     vpcId: vpc-09664cdc1e490b3e3
     subnetIds:
       - subnet-04eeb23612078895e   # us-east-1a EKS node subnet
@@ -30,12 +24,12 @@ spec:
       - 10.10.32.0/19
     nodeSecurityGroupId: sg-0b912b696480c2a2f
     controlPlaneSecurityGroupId: sg-05fdcfdd0d9f86fec
+    # ---------------------------------------------------------------
+    kubernetesVersion: "1.36"
+    nodeAmiId: ami-082b37985d4f2aa44   # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)
     endpointAccessType: public
     adminRoleArns:
       - arn:aws:iam::485646919618:role/OrbitClusterEKSAdmin
-    kubernetesVersion: "1.36"
-    nodeAmiId: ami-082b37985d4f2aa44   # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)
-    # -----------------------------------------
     tags:
       team: platform
       managed-by: crossplane

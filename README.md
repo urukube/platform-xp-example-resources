@@ -28,9 +28,11 @@ kubectl get managed -l crossplane.io/claim-name=<claim-name>
 ```
 platform-xp-example-resources/
 ├── s3/
-│   └── claim-test-s3.yaml          # US3Bucket — basic bucket in BU001 account
+│   └── claim-test-s3.yaml             # US3Bucket — basic bucket in BU001 account
 ├── networking/
-│   └── ...                         # UNetwork claims (dev/prod VPC stacks)
+│   ├── claim-network-dev.yaml         # UNetwork — dev VPC (single NAT GW, 2 AZs, auto-CIDRs)
+│   └── claim-network-prod.yaml        # UNetwork — prod VPC (per-AZ NAT GWs, 3 AZs, auto-CIDRs)
 └── eks/
-    └── ...                         # UEks claims (dev/prod EKS clusters)
+    ├── claim-eks-dev.yaml             # UEks — dev cluster (public endpoint, t3.medium)
+    └── claim-eks-prod.yaml            # UEks — prod cluster (private endpoint, m5.large, 3 AZs)
 ```
