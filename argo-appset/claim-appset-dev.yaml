@@ -1,7 +1,7 @@
 apiVersion: gitops.platform.urukube.io/v1alpha1
 kind: UArgoAppSet
 metadata:
-  name: bu001-payments-gitops
+  name: bu001-main-gitops
   namespace: default
   # Deploys any repo in githubOrg carrying the repoLabel topic, on any branch
   # matching branchPattern, to the cluster named <eksFriendlyName>-eks — apply
@@ -11,8 +11,8 @@ spec:
     buId: BU001
     eksFriendlyName: bu001-dev
     awsAccountId: "472506473117"
-    githubOrg: urukube
-    repoLabel: platform-preview-enabled
+    githubOrg: urukubetestorg
+    repoLabel: main-preview
     branchPattern: "^main$"
     # githubOrgPat is a raw secret value — DO NOT commit a real PAT here.
     # Apply this claim with the token injected at apply time instead, e.g.:
