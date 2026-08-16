@@ -15,15 +15,15 @@ spec:
     env: dev
     friendlyName: bu001-dev
     # --- values from UNetwork claim status (urukube-network-dev) ---
-    vpcId: vpc-0f5f82442242efaa1
+    vpcId: vpc-0c1686e5b11660275
     subnetIds:
-      - subnet-08c08a459c97b5e63 # us-east-1a EKS node subnet
-      - subnet-07ecf6ac5957d0458 # us-east-1b EKS node subnet
+      - subnet-04b57bec870b77e8e # us-east-1a EKS node subnet
+      - subnet-02472b229ba6b46e8 # us-east-1b EKS node subnet
     subnetCidrs:
       - 10.10.0.0/19
       - 10.10.32.0/19
-    nodeSecurityGroupId: sg-0d80938e86812869d
-    controlPlaneSecurityGroupId: sg-0b62d8e3fc08a109c
+    nodeSecurityGroupId: sg-04e578405cab3e1d6
+    controlPlaneSecurityGroupId: sg-0d4cced995f00526a
     # ---------------------------------------------------------------
     kubernetesVersion: "1.36"
     nodeAmiId: ami-082b37985d4f2aa44 # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)

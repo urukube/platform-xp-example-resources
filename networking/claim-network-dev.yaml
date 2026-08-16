@@ -10,7 +10,7 @@ metadata:
   #   Public:     10.10.192.0/24, 10.10.193.0/24
 spec:
   parameters:
-    awsAccountId: "485646919618"
+    awsAccountId: "472506473117"
     region: us-east-1
     buId: BU001
     env: dev
