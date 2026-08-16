@@ -27,6 +27,7 @@ spec:
     # ---------------------------------------------------------------
     kubernetesVersion: "1.36"
     nodeAmiId: ami-082b37985d4f2aa44 # AL2023 EKS 1.36 x86_64 us-east-1 (2026-06-30)
+    nodeInstanceType: t3.small # t3.medium isn't Free Tier eligible in this account
     endpointAccessType: public
     adminRoleArns:
       - arn:aws:iam::472506473117:role/CrossplaneEKSAdmin
