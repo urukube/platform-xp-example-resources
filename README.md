@@ -8,6 +8,7 @@ Each folder maps to one XRD package repo.
 | `s3/` | `platform-xp-s3` | `US3Bucket` |
 | `networking/` | `platform-xp-networking` | `UNetwork` |
 | `eks/` | `platform-xp-eks` | `UEks` |
+| `argo-appset/` | `platform-xp-argo-appset` | `UArgoAppSet` |
 
 ## Usage
 
@@ -32,7 +33,11 @@ platform-xp-example-resources/
 ├── networking/
 │   ├── claim-network-dev.yaml         # UNetwork — dev VPC (single NAT GW, 2 AZs, auto-CIDRs)
 │   └── claim-network-prod.yaml        # UNetwork — prod VPC (per-AZ NAT GWs, 3 AZs, auto-CIDRs)
-└── eks/
-    ├── claim-eks-dev.yaml             # UEks — dev cluster (public endpoint, t3.medium)
-    └── claim-eks-prod.yaml            # UEks — prod cluster (private endpoint, m5.large, 3 AZs)
+├── eks/
+│   ├── claim-eks-dev.yaml             # UEks — dev cluster (public endpoint, t3.medium)
+│   └── claim-eks-prod.yaml            # UEks — prod cluster (private endpoint, m5.large, 3 AZs)
+└── argo-appset/
+    └── claim-appset-dev.yaml          # UArgoAppSet — deploys main-branch payments-api to bu001-dev-eks
 ```
+
+`claim-appset-dev.yaml` requires `spec.parameters.githubOrgPat` (a raw GitHub PAT) — never commit a real value into this file; inject it at `kubectl apply` time instead.
