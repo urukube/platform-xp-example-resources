@@ -10,6 +10,7 @@ spec:
   parameters:
     buId: BU001
     eksFriendlyName: bu001-dev
+    environment: dev
     awsAccountId: "472506473117"
     githubOrg: urukubetestorg
     repoLabel: main-preview
